@@ -20,6 +20,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "infoPlist": {
+  "NSPhotoLibraryAddUsageDescription": "Give Expo experiences permission to save photos"
+},
     "assetBundlePatterns": [
       "**/*"
     ],
