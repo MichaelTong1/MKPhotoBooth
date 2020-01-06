@@ -36,6 +36,8 @@ export default class CameraExample extends React.Component {
   }
 
   _countDown = () => {
+
+
     if (this.state.count && this.state.count > 1) {
       this.setState({ count: this.state.count - 1 })
       return
@@ -48,13 +50,14 @@ export default class CameraExample extends React.Component {
     this._capturePhoto()
   }
 
+
   _handlePressStart = () => {
     // init counter
-    this.setState({ ready: false, count: 2 })
+    this.setState({ ready: false, count: 5})
     // start interval to count down
     this._countdown = setInterval(() => {this._countDown()}, 1000)
   }
-  
+
   _capturePhoto = async () => {
     // take photo
     let image = await this._camera.takePictureAsync()
@@ -66,10 +69,10 @@ export default class CameraExample extends React.Component {
     // then save image to camera roll and close preview
     setTimeout(async () => {
       // capture photo with image overlay
-      let result = await takeSnapshotAsync(this._previewRef, {format: 'png', quality: 1.0});
+      //let result = await takeSnapshotAsync(this._previewRef, {format: 'png', quality: 1.0});
       // save to camera roll
       //let saveResult = await CameraRoll.saveToCameraRoll(image, 'photo');
-      let saveResult = await MediaLibrary.saveToLibraryAsync(result);
+      let saveResult = await MediaLibrary.saveToLibraryAsync(image.uri);
       // reset back to ready state (show start button and hide preview image)
       this.setState({ ready: true, image: null })
     }, 3000)
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
   flipX: { transform: [{rotateY: '180deg' }] },
   flashBG: { backgroundColor: '#ffffff' },
   transparent: { backgroundColor: 'transparent' },
-  logo: { position: 'absolute', top: 10, left: 10, width: boxHeight * .4, height: boxHeight * .4 },
+  logo: { position: 'absolute', top: 10, left: 10, width: boxHeight * .01, height: boxHeight * .01 },
   groupPic: { position: 'absolute', bottom: 0, right: 10, width: boxHeight * .2, height: boxHeight * .2 },
   fillScreen: { position: 'absolute', top: 0, left: 0, bottom: 0, right: 0 },
   flexCenter: { alignItems: 'center', justifyContent: 'center' },
